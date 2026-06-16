@@ -11,20 +11,10 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <header class="navbar navbar-dark bg-dark sticky-top navbar-expand-md">
-      <div class="container">
-        <%= link_to "sample app", '#', id: "logo" %>
-        <nav>
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><%= link_to "Home", '#', class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "Help", '#', class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "Log in", '#', class: "nav-link" %></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <%= render "layouts/header" %>
     <div class="container">
       <%= yield %>
+      <%= render "layouts/footer" %>
     </div>
   </body>
 </html>
