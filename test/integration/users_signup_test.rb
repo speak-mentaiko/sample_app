@@ -33,5 +33,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_response :success
+    assert_not flash.empty?
   end
 end
