@@ -18,4 +18,20 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select "div.field_with_errors"
     assert_select "div#error_explanation"
   end
+
+  test "valid signup information" do
+    assert_difference 'User.count', 1 do
+      post users_path,
+      params: {
+        user: {
+          name: "Example User",
+          email: "user@example.com",
+          password: "validpass",
+          password_confirmation: "validpass"
+        }
+      }
+    end
+    follow_redirect!
+    assert_response :success
+  end
 end
