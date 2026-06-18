@@ -1,11 +1,45 @@
 <header class="navbar navbar-dark bg-dark sticky-top navbar-expand-md">
   <div class="container">
-    <%= link_to "sample app", root_path, id: "logo" %>
-    <nav>
+    <%= link_to "sample app", root_path, id: "logo", class: "navbar-brand" %>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <nav class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Help", help_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Log in", login_path, class: "nav-link" %></li>
+        <% if logged_in? %>
+          <li class="nav-item"><%= link_to "Users", "#", class: "nav-link" %></li>
+          <li class="nav-item dropdown">
+            <a
+              href="#"
+              id="account"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+                Account
+            </a>
+              <ul id="dropdown-menu" class="dropdown-menu">
+                <li><%= link_to "Profile", current_user, class: "dropdown-item" %></li>
+                <li><%= link_to "Settings", '#', class: "dropdown-item" %></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <%= link_to "Log out", logout_path, data: { "turbo-method": :delete }, class: "dropdown-item" %>
+                </li>
+              </ul>
+          </li>
+        <% else %>
+          <li class="nav-item"><%= link_to "Log in", login_path, class: "nav-link" %></li>
+        <% end %>
       </ul>
     </nav>
   </div>
