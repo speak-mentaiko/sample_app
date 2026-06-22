@@ -40,14 +40,16 @@ class InvalidPasswordTest < UsersLogin
   end
 end
 
-class ValidLoginTest < UsersLogin
+class ValidLogin < UsersLogin
   def setup
     super
     post login_path, params: {
-      session: { email:    @user.email, password: "password" }
+      session: { email: @user.email, password: "password" }
     }
   end
+end
 
+class ValidLoginTest < ValidLogin
   test "valid login" do
     assert is_logged_in?
     assert_redirected_to @user
@@ -62,19 +64,21 @@ class ValidLoginTest < UsersLogin
   end
 end
 
-class LogoutTest < UsersLogin
+class Logout < ValidLogin
   def setup
     super
     delete logout_path
   end
+end
 
+class LogoutTest < Logout
   test "successful logout" do
     assert_not is_logged_in?
     assert_response :see_other
     assert_redirected_to root_url
   end
 
-  test "login with valid information" do
+  test "redirect after logout" do
     follow_redirect!
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", logout_path,      count: 0
