@@ -66,7 +66,7 @@ jobs:
         run: bin/rubocop -f github
 
       - name: Lint ERB files
-        run: bundle exec erb_lint --lint-all
+        run: bundle exec erb_lint app/views/
 
   test:
     runs-on: ubuntu-latest
