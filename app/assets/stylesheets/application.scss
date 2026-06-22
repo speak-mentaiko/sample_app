@@ -61,13 +61,13 @@ p {
 /* header */
 
 #logo {
-  float: left;
-  margin-right: 10px;
+  //float: left;
+  //margin-right: 10px;
   font-size: 1.7em;
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  //padding-top: 9px;
   font-weight: bold;
   &:hover {
     color: white;
@@ -97,6 +97,23 @@ footer {
     li {
       float: left;
       margin-left: 15px;
+    }
+  }
+}
+@media (max-width: 800px) {
+  footer {
+    small {
+      display: block;
+      float: none;
+      margin-bottom: 1em;
+    }
+    ul {
+      float: none;
+      padding: 0;
+      li {
+        float: none;
+        margin-left: 0;
+      }
     }
   }
 }

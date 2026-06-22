@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# エラーが起きたらその時点で処理を中断する設定
+set -e
+
+echo "Running RuboCop..."
+bin/rubocop -a
+
+echo "Running ERB Lint..."
+bundle exec erb_lint app/views/ -a
+
+echo "All linting & formatting complete!"
