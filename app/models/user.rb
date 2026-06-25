@@ -10,7 +10,7 @@ class User < ApplicationRecord
     format: { with: URI::MailTo::EMAIL_REGEXP },
     uniqueness: true
   )
-  validates :password, presence: true, length: { minimum: 8 }
+  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
 
   has_secure_password
 

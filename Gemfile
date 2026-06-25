@@ -42,6 +42,10 @@ gem "image_processing", "~> 2.0"
 
 gem "dartsass-rails"
 gem "bootstrap"
+gem "kaminari"
+gem "bootstrap5-kaminari-views"
+
+gem "faker"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
