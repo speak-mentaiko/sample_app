@@ -1,6 +1,7 @@
 class PasswordResetsController < ApplicationController
   before_action :get_user, only: [ :edit, :update ]
   before_action :valid_user, only: [ :edit, :update ]
+  before_action :check_expiration, only: [ :edit, :update ]
 
   def new
   end
@@ -22,6 +23,17 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
+    if params[:user][:password].empty?
+      @user.errors.add(:password, "can't be empty")
+      render "edit", status: :unprocessable_entity
+    elsif @user.update(user_params)
+      reset_session
+      log_in @user
+      flash[:success] = "Password has been reset."
+      redirect_to @user
+    else
+      render "edit", status: :unprocessable_entity
+    end
   end
 
   private
@@ -33,6 +45,14 @@ class PasswordResetsController < ApplicationController
     def valid_user
       unless @user && @user.activated? && @user.authenticated?(:reset, params[:id])
         redirect_to root_url
+      end
+    end
+
+    # トークンが期限切れか銅貨を確認する
+    def check_expiratuion
+      if @user.password_reset_expired?
+        flash[:danger] = "Password reset has expired."
+        redirect_to new_password_reset_url
       end
     end
 end
