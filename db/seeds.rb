@@ -23,4 +23,3 @@ User.create!(
     activated_at: Time.zone.now
   )
 end
-
