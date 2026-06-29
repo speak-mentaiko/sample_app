@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    redirect_to root_url, status: :see_other and return unless @user.activated?
   end
 
   def new
@@ -12,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all.page(params[:page]).per(30)
+    @users = User.where(activated: true).page(params[:page]).per(30)
   end
 
   def create
