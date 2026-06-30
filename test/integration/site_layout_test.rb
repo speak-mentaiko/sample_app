@@ -24,7 +24,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :success
 
-    assert_select "a[href=?]", root_path, count: 2
+    assert_select "a[href=?]", root_path, count: 3
     assert_select "a[href=?]", help_path
     assert_select "a[href=?]", users_path
     assert_select "a[href=?]", user_path(@user)
