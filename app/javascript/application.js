@@ -4,3 +4,5 @@ import "controllers"
 
 import "bootstrap"
 import "@popperjs/core"
+
+import "custom/image_upload"
