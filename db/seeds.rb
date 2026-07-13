@@ -10,7 +10,7 @@ User.create!(
 )
 
 # 追加のユーザーをまとめて生成する
-50.times do |n|
+99.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
@@ -29,3 +29,11 @@ users = User.order(:created_at).take(6)
   content = Faker::Lorem.sentence(word_count: 5)
   users.each { |user| user.microposts.create!(content: content) }
 end
+
+# ユーザーフォローのリレーションシップを作成する
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
